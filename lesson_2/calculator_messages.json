@@ -1,0 +1,11 @@
+{
+    "welcome" : "Welcome to Calculator",
+    "invalid_number" : "Hmm... that doesn't look like a valid number.",
+    "invalid_operation" : "You must choose + - * /",
+    "ask_num1" : "What's the first number?",
+    "ask_num2" : "What's the second number?",
+    "ask_operation" : "What operation would you like to perform? (+ - * /)",
+    "another_operation" : "Whould you like to perform another operation? (y/n)"
+
+
+}

@@ -1,3 +1,9 @@
+import json
+
+# Load messages from JSON file
+with open('calculator_messages.json', 'r') as file:
+    MESSAGES = json.load(file)
+
 def prompt(message):
     print(f"==> {message}")
 
@@ -9,49 +15,56 @@ def invalid_number(number_str):
 
     return False
 
-# Welcome the user
-prompt('Welcome to Calculator!')
+while True:
+    # Welcome the user
+    prompt(MESSAGES['welcome'])
 
-# Ask user for first number
-prompt("What's the first number?")
-num_1 = input()
-
-while invalid_number(num_1):
-    prompt("Hmm... that does not look like a valid number.")
+    # Ask user for first number
+    prompt(MESSAGES['ask_num1'])
     num_1 = input()
 
-# Ask user for second number
-prompt("What's the second number?")
-num_2 = input()
+    while invalid_number(num_1):
+        prompt(MESSAGES['invalid_number'])
+        num_1 = input()
 
-while invalid_number(num_2):
-    prompt("Hmm... that does not look like a valid number.")
-    num_1 = input()
+    # Ask user for second number
+    prompt(MESSAGES['ask_num2'])
+    num_2 = input()
 
-# Ask user for type of operation to perform: + - x /
-prompt('Specify operation type (+, -, *, /): ')
-op_type = input()
+    while invalid_number(num_2):
+        prompt(MESSAGES['invalid_number'])
+        num_1 = input()
 
-while op_type not in ["+", "-", "*", "/"]:
-    prompt('You must choose +, -, * /')
+    # Ask user for type of operation to perform: + - x /
+    prompt(MESSAGES['ask_operation'])
     op_type = input()
 
-num_1 = int(num_1)
-num_2 = int(num_2)
+    while op_type not in ["+", "-", "*", "/"]:
+        prompt(MESSAGES['invalid_operation'])
+        op_type = input()
 
-# Calculate
-match op_type:
-    case '+':
-        result = num_1 + num_2
+    num_1 = int(num_1)
+    num_2 = int(num_2)
 
-    case '-':
-        result = num_1 - num_2
+    # Calculate
+    match op_type:
+        case '+':
+            result = num_1 + num_2
 
-    case '*':
-        result = num_1 * num_2
+        case '-':
+            result = num_1 - num_2
 
-    case '/':
-        result = num_1 / num_2
+        case '*':
+            result = num_1 * num_2
 
-# Display result
-print(f'The results is: {result}')
+        case '/':
+            result = num_1 / num_2
+
+    # Display result
+    prompt(f'The result is {result}')
+
+    prompt(MESSAGES['another_operation'])
+    another_one = input()
+    
+    if (another_one and another_one[0].lower()) != 'y':
+        break
