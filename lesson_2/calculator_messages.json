@@ -1,11 +1,24 @@
-{
-    "welcome" : "Welcome to Calculator",
-    "invalid_number" : "Hmm... that doesn't look like a valid number.",
-    "invalid_operation" : "You must choose + - * /",
-    "ask_num1" : "What's the first number?",
-    "ask_num2" : "What's the second number?",
-    "ask_operation" : "What operation would you like to perform? (+ - * /)",
-    "another_operation" : "Whould you like to perform another operation? (y/n)"
+ {
+    "en" :
+    {
+        "welcome" : "Welcome to Calculator",
+        "invalid_number" : "Hmm... that doesn't look like a valid number.",
+        "invalid_operation" : "You must choose + - * /",
+        "ask_num1" : "What's the first number?",
+        "ask_num2" : "What's the second number?",
+        "ask_operation" : "What operation would you like to perform? (+ - * /)",
+        "another_operation" : "Whould you like to perform another operation? (y/n)"
+    },
 
+    "es" :
+    {
+        "welcome" : "Bienvenido a la Calculadora",
+        "invalid_number" : "Mmm... ese número no parece válido.",
+        "invalid_operation" : "Debe elegir + - * /",
+        "ask_num1" : "¿Cuál es el primer número?",
+        "ask_num2" : "¿Cuál es el segundo número?",
+        "ask_operation" : "¿Qué operación desea realizar? (+ - * /)",
+        "another_operation" : "Desea realizar otra operación? (y/n)"
+    }
 
 }

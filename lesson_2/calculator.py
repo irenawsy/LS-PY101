@@ -15,32 +15,35 @@ def invalid_number(number_str):
 
     return False
 
+prompt("Select language")
+user_lang = input()
+
 while True:
     # Welcome the user
-    prompt(MESSAGES['welcome'])
+    prompt(MESSAGES[user_lang]['welcome'])
 
     # Ask user for first number
-    prompt(MESSAGES['ask_num1'])
+    prompt(MESSAGES[user_lang]['ask_num1'])
     num_1 = input()
 
     while invalid_number(num_1):
-        prompt(MESSAGES['invalid_number'])
+        prompt(MESSAGES[user_lang]['invalid_number'])
         num_1 = input()
 
     # Ask user for second number
-    prompt(MESSAGES['ask_num2'])
+    prompt(MESSAGES[user_lang]['ask_num2'])
     num_2 = input()
 
     while invalid_number(num_2):
-        prompt(MESSAGES['invalid_number'])
+        prompt(MESSAGES[user_lang]['invalid_number'])
         num_1 = input()
 
     # Ask user for type of operation to perform: + - x /
-    prompt(MESSAGES['ask_operation'])
+    prompt(MESSAGES[user_lang]['ask_operation'])
     op_type = input()
 
     while op_type not in ["+", "-", "*", "/"]:
-        prompt(MESSAGES['invalid_operation'])
+        prompt(MESSAGES[user_lang]['invalid_operation'])
         op_type = input()
 
     num_1 = int(num_1)
@@ -63,7 +66,7 @@ while True:
     # Display result
     prompt(f'The result is {result}')
 
-    prompt(MESSAGES['another_operation'])
+    prompt(MESSAGES[user_lang]['another_operation'])
     another_one = input()
     
     if (another_one and another_one[0].lower()) != 'y':
