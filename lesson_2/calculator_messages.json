@@ -1,24 +1,31 @@
  {
     "en" :
     {
-        "welcome" : "Welcome to Calculator",
+        "welcome" : "Welcome to Calculator!",
         "invalid_number" : "Hmm... that doesn't look like a valid number.",
         "invalid_operation" : "You must choose + - * /",
         "ask_num1" : "What's the first number?",
         "ask_num2" : "What's the second number?",
         "ask_operation" : "What operation would you like to perform? (+ - * /)",
-        "another_operation" : "Whould you like to perform another operation? (y/n)"
+        "another_operation" : "Would you like to perform another operation? (y/n)",
+        "yes" : "yes",
+        "no" : "no",
+        "invalid_language" : "Please choose from this list: en - English / es - Español",
+        "division_by_zero" : "Denominator cannot be zero"
     },
 
     "es" :
     {
-        "welcome" : "Bienvenido a la Calculadora",
+        "welcome" : "Bienvenido a la Calculadora!",
         "invalid_number" : "Mmm... ese número no parece válido.",
         "invalid_operation" : "Debe elegir + - * /",
         "ask_num1" : "¿Cuál es el primer número?",
         "ask_num2" : "¿Cuál es el segundo número?",
         "ask_operation" : "¿Qué operación desea realizar? (+ - * /)",
-        "another_operation" : "Desea realizar otra operación? (y/n)"
+        "another_operation" : "Desea realizar otra operación? (s/n)",
+        "yes" : "si",
+        "no" : "no",
+        "division_by_zero" : "La denominadora no puede ser cero"
     }
 
 }
