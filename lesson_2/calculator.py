@@ -15,6 +15,27 @@ def invalid_number(number_str):
 
     return False
 
+def perform_calculation(num1, num2, operation):
+    match operation:
+        case '+':
+            result = num1 + num2
+
+        case '-':
+            result = num1 - num2
+
+        case '*':
+            result = num1 * num2
+
+        case '/':
+            try:
+                result = num1 / num2
+                result = round(result, 2)
+            except ZeroDivisionError:
+                prompt(message('division_by_zero', user_lang))
+                result = message('division_by_zero', user_lang)
+   
+    return result
+
 # PROGRAM CODE
 # Load messages from JSON file
 with open('calculator_messages.json', 'r') as file:
@@ -38,51 +59,34 @@ while True:
 
     # Ask user for first number
     prompt(message('ask_num1', user_lang))
-    num_1 = input()
+    num_1 = input().strip()
 
     while invalid_number(num_1):
         prompt(message('invalid_number', user_lang))
-        num_1 = input()
+        num_1 = input().strip()
 
     # Ask user for second number
     prompt(message('ask_num2', user_lang))
-    num_2 = input()
+    num_2 = input().strip()
 
     while invalid_number(num_2):
         prompt(message('invalid_number', user_lang))
-        num_2 = input()
+        num_2 = input().strip()
 
     # Ask user for type of operation to perform: + - x /
     prompt(message('ask_operation', user_lang))
-    op_type = input()
+    op_type = input().strip()
 
     while op_type not in ["+", "-", "*", "/"]:
         prompt(message('invalid_operation', user_lang))
-        op_type = input()
+        op_type = input().strip()
 
     # Convert input into appropriate data type
     num_1 = float(num_1)
     num_2 = float(num_2)
 
     # Calculate
-    match op_type:
-        case '+':
-            result = num_1 + num_2
-
-        case '-':
-            result = num_1 - num_2
-
-        case '*':
-            result = num_1 * num_2
-
-        case '/':
-            try:
-                result = num_1 / num_2
-            except ZeroDivisionError:
-                prompt(message('division_by_zero', user_lang))
-                result = "Calculation Error"
-
-    result = round(result, 2)
+    result = perform_calculation(num_1, num_2, op_type)
 
     # Display result
     prompt(f'{num_1} {op_type} {num_2}  = {result}')
