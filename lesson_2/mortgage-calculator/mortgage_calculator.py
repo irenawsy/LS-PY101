@@ -7,84 +7,99 @@ Mortgage calculator that takes:
 Calculates and outputs user's monthly payment amount.
 """
 
+# CONSTANTS
+MONTHS_IN_YEAR = 12
+
 # SUB-FUNCTIONS
 def prompt(prompt_message):
     """
-    Adds "==>" before prompt message to enhance 
-    readability of instructions for user
+    Adds "==>" before prompt message to enhance readability of instructions for user
     """
     print(f"==> {prompt_message}")
 
-def get_loan():
+def get_valid_input(zero_check = False):
     """
-    Gets and validate user input for Loan Amount
-    """
-    while True:
-        prompt("What is your loan amount?")
-        prompt("(Enter in dollar and cents format, e.g. 123.45, or 700.20)")
-        prompt("(Do NOT include dollar signs)")
-        loan = input().strip()
-        try:
-            float(loan)
-        except ValueError:
-            prompt('Error: Loan must be in numerical format')
-        else:
-            return float(loan)
-
-def get_apr():
-    """
-    Get and validate user input for Annual Percentage Rate (APR)
+    Get and validate user's input.
+    Only positive numbers are allowed.
+    Can toggle for zero-check
+    :param zero_check: False - no zero-check, True - do zero-check
     """
     while True:
-        prompt("What is the Annual Percentage Rate (APR)?")
-        prompt("Enter in decimal format (0.05 for 5%)")
-        input_apr = input().strip()
+        user_input = input().strip()
         try:
-            float(input_apr)
+            user_input = float(user_input)
+            if user_input < 0:
+                prompt('Error: Input must be positive')
+                continue
+            if zero_check:
+                if user_input == 0:
+                    prompt('Error: Input must not be Zero')
+                    continue
         except ValueError:
-            prompt('Error: Loan must be in numerical format')
+            prompt('Error: Input must be in numerical format')
         else:
-            return float(input_apr)
+            return user_input
 
-def get_duration():
+def display_results(loan_amt, annual_interest_rate, duration_years, duration_months, payment):
     """
-    Get and validate user input for loan duration in years.
+    Display results
     """
-    while True:
-        prompt("How long is the loan in years?")
-        input_duration_in_years = input().strip()
-        try:
-            float(input_duration_in_years)
-        except ValueError:
-            prompt('Error: Loan must be in numerical format')
-        else:
-            return float(input_duration_in_years)
+    print('\n')
+    prompt('RESULTS')
+    prompt(f'Loan Amount: ${loan_amt:.2f}')
+    prompt(f'APR: {annual_interest_rate * 100}%')
+    prompt(f'Loan Duration: {duration_years} years ' +
+           f'({duration_months} months)')
+    prompt(f'Your monthly payment is ${payment:.2f} for ' +
+           f'{duration_months} months.')
+    print('\n')
 
-# Get loan amount
-loan_amount = get_loan()
+# Mortgage Calculator
+while True:
+    print('\n')
 
-# Get the Annual Percentage Rate (APR)
-apr = get_apr()
+    # Get loan amount
+    prompt("What is your loan amount?")
+    prompt("(Enter in dollar and cents format, e.g. 123.45, or 700.20)")
+    prompt("(Do NOT include dollar signs)")
+    loan_amount = get_valid_input(True)
 
-# Get the loan duartion
-loan_duration_in_years = get_duration()
+    # Get the Annual Percentage Rate (APR)
+    prompt("What is the Annual Percentage Rate (APR)?")
+    prompt("Enter in decimal format (0.05 for 5%)")
+    apr = get_valid_input()
 
-# Calculate loan duration in months
-loan_duration_in_months = loan_duration_in_years * 12
-loan_duration_in_months = round(loan_duration_in_months, 2)
+    # Get the loan duration
+    prompt("How long is the loan in years?")
+    loan_duration_in_years = get_valid_input(True)
 
-# Calculate Monthly Interst Rate (MIR)
-monthly_interest_rate = apr / 12
+    # Calculate loan duration in months
+    loan_duration_in_months = loan_duration_in_years * MONTHS_IN_YEAR
+    loan_duration_in_months = round(loan_duration_in_months, 2)
 
-# Calculate monthly payment
-if monthly_interest_rate == 0:
-    monthly_payment = loan_amount / loan_duration_in_months
-else:
-    monthly_payment = loan_amount \
-        * (monthly_interest_rate \
-           / (1 - (1 + monthly_interest_rate) ** (-loan_duration_in_months)))
+    # Calculate Monthly Interst Rate (MIR)
+    monthly_interest_rate = apr / MONTHS_IN_YEAR
 
-monthly_payment = round(monthly_payment, 2)
+    # Calculate monthly payment
+    if monthly_interest_rate == 0:
+        monthly_payment = loan_amount / loan_duration_in_months
+    else:
+        monthly_payment = (loan_amount *
+                           (monthly_interest_rate /
+                            (1 - (1 + monthly_interest_rate) ** (-loan_duration_in_months))))
 
-# Print payment as dollar and cents amount
-prompt(f"Your monthly payment is ${monthly_payment} for {loan_duration_in_months} months.")
+    # Print payment as dollar and cents amount
+    display_results(loan_amount,
+                    apr,
+                    loan_duration_in_years,
+                    loan_duration_in_months,
+                    monthly_payment)
+
+    # Ask if user wants to do another calculation
+    prompt('Another calculation? (y/n)')
+    another_one = input().strip()
+
+    # Terminate if user enters anything other than 'yes' or 'y'
+    # If no input, assume "no"
+    if (another_one and another_one[0].lower()) != "y":
+        break
