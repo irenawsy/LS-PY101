@@ -1,0 +1,38 @@
+Q1. prints `5`. 
+    `num` variable is first declared on line 1 with assigned value of `5`.
+    `my_func()` is declared on lines 3-4.
+    `my_func()` on line 6 executes `my_func()` defined on lines 3-4.
+    `num` was NOT defined within the `my_func()` scope, so
+    `print(num)` on line 4 accesses `num` outside the scope, 
+    which has a value of `5`
+
+Q2. prints `5`.
+    `num` variable is first declared on line 1 with assigned value of `5`.
+    `my_func()` is declared on lines 3-4.
+
+    `num = 10` in line 4 creates `num` variable within the `my_func` scope,
+    which is separate from the `num` variable declared outside the scope on line 1.
+    Since `num = 10` is within the sub-function scope, 
+    its value is not accessed outside the function scope.
+
+    `my_func()` on line 6 calls on `my_func()` defined on lines 3-4.
+    
+    `print(num)` on line 7 accesses the `num` variable defined in the outer scope.
+
+Q3. prints `10`
+    `num` variable is first declared on line 1 with assigned value of `5`.
+    `my_func()` is declared on lines 3-5.
+    `global num` on line 4 within the `my_func()` declaration made the
+    `num` variable global.
+    `num` shall be assigned with a value of `10` on line 10.
+   
+    Calling on `my_func()` on line 7 executes the `my_func()`, 
+    so line 10 was executed and `num` is re-assigned with value `10`
+    
+Q4. prints `Hello World`
+
+Q5. Raises `NameError`
+
+Q6. Prints 
+    `Inner 1: 25`
+    `Inner 2: 15`
